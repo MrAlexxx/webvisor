@@ -85,10 +85,10 @@
             var doughnutData = [
             <?php $click = 0; foreach($ratingClick as $rating):?>
                 {
-                    value: <?=json_encode($rating['value'])?>,
-                    color: "<?=json_encode($rating['color'])?>",
-                    highlight: "<?=json_encode($rating['highlight'])?>",
-                    label: "<?=json_encode($rating['label'])?>"
+                    value: <?=$rating['value']?>,
+                    color: "<?=$rating['color']?>",
+                    highlight: "<?=$rating['highlight']?>",
+                    label: "<?=$rating['label']?>"
                 },
                 <?php $click += $rating['value'];endforeach;?>
                 {

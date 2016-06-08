@@ -137,8 +137,7 @@ class Views extends \yii\db\ActiveRecord
             if ($point['qty'] > 5)
                 $color = imagecolorallocatealpha($im, 230, 1, 1, 95);
             else
-                $color = imagecolorallocatealpha($im, $this->colors[0][$point['qty']]['r'],
-                    $this->colors[0][$point['qty']]['g'], $this->colors[0][$point['qty']]['b'], 95);
+                $color = imagecolorallocatealpha($im, $this->colors[0][$point['qty']]['r'], $this->colors[0][$point['qty']]['g'], $this->colors[0][$point['qty']]['b'], 95);
 
             imagefilledarc($im, $point['x'], $point['y'], 30, 30, 0, 360, $color, IMG_ARC_PIE);
         }

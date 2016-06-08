@@ -103,6 +103,12 @@ ul.pagination>li.active>a:hover{
     border-color: #05693A;
 }
 
-/*#w0-filters{*/
-    /*display: none;*/
-/*}*/
+.table>thead>tr>th{
+    text-align: center;
+}
+.table>thead>tr{
+    border-top: 2px solid #ecf0f5;
+    border-bottom: 2px solid #ecf0f5;
+    font-size: 12px;
+
+}
