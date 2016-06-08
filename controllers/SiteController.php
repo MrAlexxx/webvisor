@@ -72,7 +72,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect(Url::to(['site/click-map']));
+            return $this->goBack();
         }
         return $this->render('login', [
             'model' => $model,
@@ -87,7 +87,7 @@ class SiteController extends Controller
                 if (Yii::$app->getUser()->login($user)) {
                     ?>
                     <script>
-                        window.location.href = "<?=Url::to(['site/click-map'])?>";
+                        window.location.href = "<?=Url::to(['site/index'])?>";
                     </script>
                     <?
                     die;
@@ -166,19 +166,32 @@ class SiteController extends Controller
     }
 
     public function actionChoiceForecasting(){
+
+    //назви продуктів
         $products = Products::getNames();
+
+    //рейтинг продажів
         $ratingDB = Order::getRatingOrders();
-        $month = $rating = [];
+        $month = $monthDB = $rating = [];
         foreach ($ratingDB as $ord) {
             $month_temp = Order::getMonthName($ord['date']);
-            $month[] = $month_temp;
+            $monthDB[] = $month_temp;
             $rating[$month_temp][] = $ord;
         }
+        $monthDB = array_unique($monthDB);
+        foreach ($monthDB as $mth) {
+            array_push($month,$mth);
+        }
+        $rating = Order::getAmountByMonth($rating);
+
+    //найменш вживані продукти
+        $notUsedProducts = Products::getNotUsedProducts();
 
         return $this->render('choice_forecasting', [
             'products' => $products,
-            'rating' => $rating,
-            'month' => array_unique($month)
+            'rating' => json_encode($rating),
+            'month' => json_encode($month),
+            'notUsedProducts' => $notUsedProducts
 
         ]);
     }

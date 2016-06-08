@@ -51,4 +51,3 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
-A Product of Yii Software LLC

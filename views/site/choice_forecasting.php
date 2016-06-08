@@ -3,7 +3,7 @@ use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 ?>
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-4">
     <div class="box box-success">
         <div class="box-header with-border">
             <h3 class="box-title">Дослідження продажів конкретного товару:</h3>
@@ -34,27 +34,33 @@ use yii\helpers\ArrayHelper;
     <div class="box box-success">
         <div class="box-header with-border">
             <h3 class="box-title">Найменш вживані продукти:</h3>
-        </div>
-        <div class="box-body">
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-6">
-                    <div id="canvas-holder" style="width: 250px !important;">
-                        <canvas id="chart-area" width="250" height="250"/>
-                    </div>
-            </div>
-            <div class="col-md-5">
-                <ul class="chart-legend clearfix" style="margin-top: 4rem;">
-<!--                    --><?php //foreach($ratingClick as $click):?>
-<!--                        <li style="font-size: 1.6rem;"><i class="fa fa-circle-o" style="color: --><?//=$click['color']?>
-<!--                    --><?php //endforeach;?>
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table no-margin">
+                        <thead>
+                            <tr>
+                                <th>Артикул товару</th>
+                                <th>Назва</th>
+                                <th>Рівень популярності</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($notUsedProducts as $product):?>
+                            <tr>
+                                <td><a href="edelvin/goods/<?=$product['url']?>"><?=$product['article']?></a></td>
+                                <td><?=$product['name']?></td>
+                                <td><span class="label label-danger">Дуже низький</span></td>
 
-                </ul>
+                            </tr>
+                            <?php endforeach;?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
             </div>
-        </div>
-
-        </div>
         <!-- /.box-body -->
+        </div>
+
     </div>
 </div>
 
@@ -62,7 +68,7 @@ use yii\helpers\ArrayHelper;
     <div class="col-md-6">
         <div class="box box-success ">
             <div class="box-header with-border">
-                <h3 class="box-title">Рівень продажів</h3>
+                <h3 class="box-title">Рівень продажів <small>(грн/міс)</small></h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -72,7 +78,7 @@ use yii\helpers\ArrayHelper;
             </div>
             <!-- /.box-header -->
             <div class="box-body" style="display: block;">
-                <div  style="width: 600px !important;">
+                <div  style="width: 600px !important;  margin: 0 auto;">
                     <canvas id="canvas" height="306" width="405"></canvas>
                 </div>
             </div>
@@ -80,22 +86,22 @@ use yii\helpers\ArrayHelper;
         </div>
            </div>
 </div>
-<?php print_r($month)?>
-<?php //$month = implode(',',$month);echo $month;?>
+
 <script>
-    var a = <?=json_encode($month)?>;
+    var month  = <?=$month?>;
+    var rating = <?=$rating?>;
     var lineChartData = {
-        labels : ["January","February","March","April","May","June","July"],
+        labels : month,
         datasets : [
             {
-                label: "My Second dataset",
+                label: "Рівень продажів",
                 fillColor : "rgba(151,187,205,0.2)",
                 strokeColor : "rgba(151,187,205,1)",
                 pointColor : "rgba(151,187,205,1)",
                 pointStrokeColor : "#fff",
                 pointHighlightFill : "#fff",
                 pointHighlightStroke : "rgba(151,187,205,1)",
-                data : [10,20,30,40,50,60,220]
+                data : rating
             }
 
         ]

@@ -99,4 +99,10 @@ class Products extends \yii\db\ActiveRecord
     public static function getNames(){
         return self::find()->select('id,name')->groupBy('name')->indexBy('id')->asArray()->all();
     }
+
+    public static function getNotUsedProducts($limit=5){
+        $productsId = Order::getAllProductsId();
+        return self::find()->select(['name','url','article'])->where("`id` NOT IN (".substr(implode(',',$productsId),1).")")->asArray()->limit($limit)->all();
+
+    }
 }

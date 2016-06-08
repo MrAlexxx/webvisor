@@ -96,11 +96,6 @@ class Order extends \yii\db\ActiveRecord
             'pagination' => [
                 'pagesize' => 20,
             ],
-//            'sort' => [
-//                'defaultOrder' => [
-//                    '`order`.`goods_id`' => SORT_DESC,
-//                ]
-//            ],
         ]);
 
 
@@ -189,7 +184,23 @@ class Order extends \yii\db\ActiveRecord
     }
 
     public static function getRatingOrders(){
-        return self::getOrdersForPeriod();
+        return self::getOrdersForPeriod(360);
+    }
+
+    public static function getAmountByMonth($values){
+        $result = [];
+        $sum    = 0;
+        foreach ($values as $vall) {
+            foreach ($vall as $v) {
+                $sum += $v[sum];
+           }
+            array_push($result,$sum);
+        }
+        return $result;
+    }
+
+    public static function getAllProductsId(){
+        return self::find()->select('goods_id')->groupBy('goods_id')->column();
     }
 
 }

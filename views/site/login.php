@@ -18,11 +18,10 @@ $fieldOptions2 = [
     'inputTemplate' => "{input}<span class='glyphicon glyphicon-lock form-control-feedback'></span>"
 ];
 ?>
-<div class="row">
-    <div class="col-md-12">
+
 <div class="login-box">
     <div class="login-logo">
-        <img src="/web/img/logo.png" alt="logo" style="width: 246px;margin-bottom: -18%;">
+        <a href="#"><b>Admin</b>LTE</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -54,11 +53,9 @@ $fieldOptions2 = [
 
         <?php ActiveForm::end(); ?>
 
-<!--        <a href="#">I forgot my password</a><br>-->
+        <a href="#">I forgot my password</a><br>
         <a href="register.html" class="text-center">Register a new membership</a>
 
     </div>
     <!-- /.login-box-body -->
 </div><!-- /.login-box -->
-</div>
-</div>
